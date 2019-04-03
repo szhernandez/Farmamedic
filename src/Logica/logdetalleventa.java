@@ -177,6 +177,40 @@ public class logdetalleventa {
         }
         }
     }
+        
+          public boolean editarprecioxdescuento(Double descuento, int idventa){
+        try {
+            //tener cuidado al implementar este metodo debido a que no utilizamos un id de 
+            //subventa, se utiliza la logica de que se editaran en el mismo orden de insercion
+            cn = metodospool.dataSource.getConnection();
+            sSql="update detalleventa set  precio=precio-(precio*?), subtotal=precio*unidades where idventa=?";
+            PreparedStatement pst=cn.prepareStatement(sSql);
+            
+            pst.setDouble(1, descuento);
+            pst.setDouble(2, idventa);
+           
+            int n=pst.executeUpdate();
+            if(n!=0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }finally{
+        try {
+            cn.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, ex, "Error de desconexión pool", JOptionPane.ERROR_MESSAGE);
+
+        }
+        }
+    }
+        
         //Se utiliza para cuando pasa el recolector de basura
     public void finalize() throws SQLException{
         cn.close();

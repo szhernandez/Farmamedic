@@ -113,6 +113,9 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         lblfecha = new javax.swing.JLabel();
         lblhora = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lbldescuento = new javax.swing.JLabel();
+        lbldescuentoporcentaje = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -321,7 +324,7 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(537, 537, 537)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtnumventa, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(555, 555, 555))
@@ -334,11 +337,15 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnumventa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtnumventa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -566,6 +573,18 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
         lblhora.setForeground(new java.awt.Color(255, 255, 255));
         lblhora.setText("hh:mm");
 
+        jLabel10.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Descuento $");
+
+        lbldescuento.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lbldescuento.setForeground(new java.awt.Color(255, 255, 255));
+        lbldescuento.setText("0.0");
+
+        lbldescuentoporcentaje.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbldescuentoporcentaje.setForeground(new java.awt.Color(255, 255, 255));
+        lbldescuentoporcentaje.setText("hh:mm");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -577,11 +596,15 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(lblpago, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
                         .addGap(18, 18, 18)
+                        .addComponent(lbldescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(lblimporte, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(lblsobrante, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -595,6 +618,8 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                         .addComponent(lblfecha)
                         .addGap(18, 18, 18)
                         .addComponent(lblhora)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbldescuentoporcentaje)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
@@ -604,19 +629,26 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblfecha)
-                    .addComponent(lblhora))
+                    .addComponent(lblhora)
+                    .addComponent(lbldescuentoporcentaje))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbltotal)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblsobrante))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblimporte)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblpago))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblimporte))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltotal)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblsobrante)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldescuento))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblpago)))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -646,19 +678,16 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btndevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -686,7 +715,12 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
     DefaultTableModel modelo= new DefaultTableModel(){
      public boolean isCellEditable(int row, int column) {return false;}
     };//CReando el objeto de la tabla
+    public static Double descuentoporcentaje;
+    double total1, descuento;
     
+    
+    
+    //Metodo para declarar valor inicial del porcentaje
      //Metodo para insertar un nuevo producto a la tabla
    void mostrardetalleventa(String buscar){
         try {
@@ -760,32 +794,36 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
    
       void obteniendodatosventa(){
           try {
-        String []datos = new String[15];
+        String []datos = new String[18];
         datos =logvent.mostrarconsultaventas(txtnumventa.getText());
         //Asignandovalores
          txtidventa.setText(datos[0]);
          txtestadoventa.setText(datos[1]);
          lblimporte.setText(datos[2]);
-         lblpago.setText(datos[3]);
-         lblfecha.setText(datos[4]);
-         lblhora.setText(datos[5]);
-         txtidcaja.setText(datos[6]);
-         txtidcliente.setText(datos[7]);
-         txtnombrecliente.setText(datos[8]+" "+datos[9]);
-         txtclientenegocio.setText(datos[10]);
-         txttipocliente.setText(datos[11]);
-         txtlistaprecio.setText(datos[12]);
-         txttrabajadorid.setText(datos[13]);
-         txttrabajadornombre.setText(datos[14]+" "+datos[15]);
+         lbldescuento.setText(datos[3]);
+         frmpuntoconsultaventa.descuentoporcentaje=Double.parseDouble(datos[4]);
+         lbldescuentoporcentaje.setText(datos[4]);
+         lblpago.setText(datos[5]);
+         lblfecha.setText(datos[6]);
+         lblhora.setText(datos[7]);
+         txtidcaja.setText(datos[8]);
+         txtidcliente.setText(datos[9]);
+         txtnombrecliente.setText(datos[10]+" "+datos[11]);
+         txtclientenegocio.setText(datos[12]);
+         txttipocliente.setText(datos[13]);
+         txtlistaprecio.setText(datos[14]);
+         txttrabajadorid.setText(datos[15]);
+         txttrabajadornombre.setText(datos[16]+" "+datos[17]);
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null,"No encontramosla venta con la clave: " + txtbuscar.getText());
-          }
+        }
         
     }
     //Metodo que calcula el monto total
     void calculototal(){
-    
-        double sumatoria=0.0,sobrante=0.0,pagoanterior= Double.parseDouble(lblpago.getText());
+        
+        
+        double sumatoria=0.0,sobrante=0.0,pagoanterior= Double.parseDouble(lblpago.getText()),descuento;
         int totalRow= tablaventa.getRowCount();
         totalRow-=1;
         for(int i=0;i<=(totalRow);i++)
@@ -794,10 +832,18 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
 //en la parte de arriba indica el primer parametro la fila y el segundo la columna la cual estaras //manejando
              sumatoria+=sumatoria1;
         }
+       
         sobrante=pagoanterior-sumatoria;
-        lblsobrante.setText(sobrante+"");
-        lbltotal.setText(sumatoria+"");
+        lblsobrante.setText(logcommon.redondeando(sobrante)+"");
+        lbltotal.setText(logcommon.redondeando(sumatoria)+"");    
     }
+     
+    void calculodescuento(){
+         descuento= logcommon.redondeando(Double.parseDouble(lbltotal.getText())*descuentoporcentaje);
+        
+        lbldescuento.setText(descuento+"");
+    }
+    
   
     public boolean existendatosentabla(){
     Double total= Double.parseDouble(lblimporte.getText());
@@ -822,11 +868,14 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
     //Empezamos seteando los valores necesarios
       
         dtsvent.setIdVenta(Integer.parseInt(txtidventa.getText()));
-        Double efectivo, importe, sobrante,pago;
+        Double efectivo, importe, sobrante,pago, descuento, nuevodescuento,porcentaje;
         efectivo= Double.parseDouble(lblpago.getText());
         importe= Double.parseDouble(lbltotal.getText());
         sobrante= Double.parseDouble(lblsobrante.getText());
+        descuento= Double.parseDouble(lbldescuento.getText());
         pago=efectivo-sobrante;
+        porcentaje=descuento/importe;
+        
         try {
             //Calculando dato que se pondra en estado, segun el valor que se genero del efectivo
             if (efectivo>=importe) {
@@ -836,6 +885,7 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                 dtsvent.setEstado("Por pagar");
             }
             dtsvent.setImporte(importe);
+            dtsvent.setDescuento(descuento);
             dtsvent.setPago(pago);
             dtsvent.setFecha(lblfecha.getText());
             dtsvent.setHora(lblhora.getText());
@@ -962,6 +1012,8 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
        }
       
          calculototal();
+         calculodescuento();
+        
     }//GEN-LAST:event_tablaventaMouseClicked
 
     public void tableChanged(java.awt.event.MouseEvent evt) {
@@ -1205,6 +1257,7 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btndevolucion;
     private javax.swing.JButton btnsalir;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1226,6 +1279,8 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    public static javax.swing.JLabel lbldescuento;
+    private javax.swing.JLabel lbldescuentoporcentaje;
     private javax.swing.JLabel lblfecha;
     private javax.swing.JLabel lblhora;
     public static javax.swing.JLabel lblimporte;

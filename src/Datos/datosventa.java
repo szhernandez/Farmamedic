@@ -24,9 +24,10 @@ public class datosventa {
     private Integer idCliente;
     private Integer idTrab;
     private String idCaja;
+    private Double descuento;
     
     public datosventa(Integer idVenta, String estado, Double importe,Double pago, String fecha, String hora,
-    Integer idCliente,Integer idTrab,String idCaja){
+    Integer idCliente,Integer idTrab,String idCaja, Double descuento){
     this.idVenta=idVenta;
     this.estado=estado;
     this.importe=importe;
@@ -36,7 +37,7 @@ public class datosventa {
     this.idCliente=idCliente;
     this.idTrab=idTrab;
     this.idCaja=idCaja;
-    
+    this.descuento=descuento;
     }
     
     public datosventa(){}
@@ -65,6 +66,13 @@ public class datosventa {
         this.importe = importe;
     }
 
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
     public Double getPago() {
         return pago;
     }
@@ -112,6 +120,5 @@ public class datosventa {
     public void setIdCaja(String idCaja) {
         this.idCaja = idCaja;
     }
-
-
+   
 }

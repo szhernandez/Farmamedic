@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ed5e0527-5dc8-4216-9d2c-a54808686636">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="212"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="396"/>
+	<property name="ireport.y" value="203"/>
 	<parameter name="idventa" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -21,13 +21,16 @@
 	<parameter name="logo" class="java.lang.Object"/>
 	<parameter name="marcaagua" class="java.lang.Object"/>
 	<queryString>
-		<![CDATA[SELECT venta.idVenta, venta.importe,venta.fecha,venta.hora,
+		<![CDATA[SELECT venta.idVenta, venta.descuento,venta.importe,venta.fecha,venta.hora,
 detalleventa.idArt,articulo.descripcion,detalleventa.precio,detalleventa.unidades,detalleventa.subtotal,
 cliente.nombre,cliente.apellidos,cliente.negocio,empresa.idEmpresa,empresa.Nombre as nombreempresa,empresa.RFC,empresa.Calle,empresa.Numero,empresa.Colonia,empresa.CP,empresa.Ciudad,empresa.Estado,empresa.Pais,empresa.Telefono,empresa.Representante
 FROM venta, detalleventa,articulo,cliente, empresa where venta.idVenta = detalleventa.idVenta  AND detalleventa.idArt=articulo.idArt and venta.idCliente=cliente.idCliente and venta.idVenta=$P{idventa}]]>
 	</queryString>
 	<field name="idVenta" class="java.lang.Integer">
 		<fieldDescription><![CDATA[Esta tabla continen todas las subventas que le corresponden a la compra del cliente]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="importe" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Dinero total que se requiere pagar]]></fieldDescription>
@@ -331,176 +334,200 @@ FROM venta, detalleventa,articulo,cliente, empresa where venta.idVenta = detalle
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="262" splitType="Stretch">
+		<band height="272" splitType="Stretch">
 			<textField pattern="#,##0.00">
-				<reportElement x="494" y="9" width="58" height="15" uuid="1d4edc8f-3dcf-41b3-aed7-f0724e36257c"/>
+				<reportElement x="494" y="36" width="58" height="15" uuid="1d4edc8f-3dcf-41b3-aed7-f0724e36257c"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="399" y="9" width="100" height="15" uuid="462da2b7-7ffc-4f0e-89ba-53990c9f65eb"/>
+				<reportElement x="399" y="36" width="100" height="15" uuid="462da2b7-7ffc-4f0e-89ba-53990c9f65eb"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL A PAGAR $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="44" width="71" height="22" uuid="829bc7e0-81b1-4060-9631-8a7e4e8633db"/>
+				<reportElement x="3" y="59" width="71" height="22" uuid="829bc7e0-81b1-4060-9631-8a7e4e8633db"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PAGARE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="46" width="183" height="15" uuid="298cace1-0c6b-4d71-8a21-39875165b427"/>
+				<reportElement x="372" y="61" width="183" height="15" uuid="298cace1-0c6b-4d71-8a21-39875165b427"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[BUENO POR: $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="68" width="552" height="15" uuid="f2952fbe-f348-4c3b-83c3-3f786fd202fd"/>
+				<reportElement x="3" y="83" width="552" height="15" uuid="f2952fbe-f348-4c3b-83c3-3f786fd202fd"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sin protesto debo(emos) y pagare(mos) incondicionalmente en ______________________________ o donde se encuentre la cantidad ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="83" width="447" height="15" uuid="00aa682d-1731-442f-b687-ecac8ff0ecd7"/>
+				<reportElement x="3" y="98" width="447" height="15" uuid="00aa682d-1731-442f-b687-ecac8ff0ecd7"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[de $ __________________  (________________________________________________________) M.N a la orden de]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="98" width="460" height="15" uuid="67ff50d0-10b7-4884-8f42-d03548b6f43f"/>
+				<reportElement x="3" y="113" width="460" height="15" uuid="67ff50d0-10b7-4884-8f42-d03548b6f43f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Teniendose como maximo 3 pagos parciales al mismo, durante un periodo de 30 dias naturales a partir de la fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="128" width="552" height="15" uuid="c28db6ba-9187-4014-8e01-d1b58fb6be2a"/>
+				<reportElement x="3" y="143" width="552" height="15" uuid="c28db6ba-9187-4014-8e01-d1b58fb6be2a"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[La firma puesta en cualquier parte significa la aceptacion expresa del deudor y obligacion de pago.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="159" width="100" height="15" uuid="a09a183f-9767-42d3-97aa-d4cec6a1fd14"/>
+				<reportElement x="0" y="174" width="100" height="15" uuid="a09a183f-9767-42d3-97aa-d4cec6a1fd14"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DATOS DEL DEUDOR]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="3" y="173" width="100" height="15" uuid="dcddcea4-855e-45c7-a66c-827f39b4e3e9"/>
+				<reportElement x="3" y="188" width="100" height="15" uuid="dcddcea4-855e-45c7-a66c-827f39b4e3e9"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="3" y="189" width="100" height="15" uuid="77c9dc50-b203-484e-a10a-5e7eabed6a66"/>
+				<reportElement x="3" y="204" width="100" height="15" uuid="77c9dc50-b203-484e-a10a-5e7eabed6a66"/>
 				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="145" y="159" width="110" height="15" uuid="1688a1c0-31af-486f-8200-9c12cae2a7ec"/>
+				<reportElement x="145" y="174" width="110" height="15" uuid="1688a1c0-31af-486f-8200-9c12cae2a7ec"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Acepto(amos) y pagare(mos)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="145" y="211" width="110" height="15" uuid="c5f8658c-6274-45e8-8990-52557ce7ab87"/>
+				<reportElement x="145" y="226" width="110" height="15" uuid="c5f8658c-6274-45e8-8990-52557ce7ab87"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[__________________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="180" width="161" height="25" uuid="a42f80ae-5467-495f-9320-528e5a41152a"/>
+				<reportElement x="276" y="195" width="161" height="25" uuid="a42f80ae-5467-495f-9320-528e5a41152a"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago 1. Cantidad $ :________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="205" width="161" height="25" uuid="6590062a-25c7-4cdf-ad17-0b716bd91d03"/>
+				<reportElement x="276" y="220" width="161" height="25" uuid="6590062a-25c7-4cdf-ad17-0b716bd91d03"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago 2. Cantidad $ :________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="450" y="155" width="102" height="15" uuid="f2da6a8e-a74c-4f13-b5b2-046f2df3d6b0"/>
+				<reportElement x="450" y="170" width="102" height="15" uuid="f2da6a8e-a74c-4f13-b5b2-046f2df3d6b0"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Firma cobrador o agente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="155" width="161" height="15" uuid="0a2440b2-5420-431f-8e3c-5b6b15ff0d27"/>
+				<reportElement x="276" y="170" width="161" height="15" uuid="0a2440b2-5420-431f-8e3c-5b6b15ff0d27"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PAGOS PARCIALES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="179" width="97" height="25" uuid="9f63ab41-7076-4951-acef-a146b90313e2"/>
+				<reportElement x="455" y="194" width="97" height="25" uuid="9f63ab41-7076-4951-acef-a146b90313e2"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[____________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="203" width="97" height="25" uuid="6033311d-611f-49e1-b1d6-e4f2dce8606f"/>
+				<reportElement x="455" y="218" width="97" height="25" uuid="6033311d-611f-49e1-b1d6-e4f2dce8606f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[____________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="231" width="110" height="15" uuid="160214b8-1d89-4638-abc7-de57f839d02c"/>
+				<reportElement x="144" y="246" width="110" height="15" uuid="160214b8-1d89-4638-abc7-de57f839d02c"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[firma]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="275" y="230" width="161" height="25" uuid="2e68305a-9db3-4249-88a7-166946ccb81b"/>
+				<reportElement x="275" y="245" width="161" height="25" uuid="2e68305a-9db3-4249-88a7-166946ccb81b"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago 3. Cantidad $ :________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="454" y="229" width="98" height="25" uuid="4e8b48ba-af1b-4cf8-a435-e8b540261ff1"/>
+				<reportElement x="454" y="244" width="98" height="25" uuid="4e8b48ba-af1b-4cf8-a435-e8b540261ff1"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[____________________]]></text>
 			</staticText>
 			<line>
-				<reportElement x="2" y="44" width="550" height="1" uuid="68c417ea-75e9-4b8a-9025-17bd624692a3"/>
+				<reportElement x="2" y="59" width="550" height="1" uuid="68c417ea-75e9-4b8a-9025-17bd624692a3"/>
 			</line>
 			<staticText>
-				<reportElement x="3" y="113" width="552" height="15" uuid="6366d717-efbe-423b-bcd7-2df1a5511a2c"/>
+				<reportElement x="3" y="128" width="552" height="15" uuid="6366d717-efbe-423b-bcd7-2df1a5511a2c"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Despues de dicho periodo la falta puntual de pago causara un interes moratorio del _______% mensual, sobre el monto total.]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="452" y="97" width="68" height="15" uuid="746afe90-8bbd-474a-9786-f7a3a88e28b4"/>
+				<reportElement x="452" y="112" width="68" height="15" uuid="746afe90-8bbd-474a-9786-f7a3a88e28b4"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}+"."]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="440" y="83" width="114" height="15" uuid="fdad2711-55c1-42af-81a1-a75bb672c972"/>
+				<reportElement x="440" y="98" width="114" height="15" uuid="fdad2711-55c1-42af-81a1-a75bb672c972"/>
 				<textElement>
 					<font fontName="Times New Roman" size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Representante}+"."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="7" width="100" height="15" uuid="e00d3472-939b-4ae3-827f-62fd9d6d7a9b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[*SUBTOTAL $]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="494" y="7" width="58" height="15" uuid="4693080e-2789-4c29-ba99-f8ec58137fdd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new Double($F{importe}.doubleValue() + $F{descuento}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="21" width="100" height="15" uuid="d60dc3ea-95da-40f4-a170-6248df8f0a6d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO $]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="494" y="21" width="58" height="15" uuid="ebae3bc5-f902-4ad8-bd22-97b254403d2a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

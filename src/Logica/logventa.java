@@ -38,18 +38,19 @@ public class logventa {
         //No se inserta el valod de IdVenta devido a que este es un Int autoincrementable
         try {
             cn = metodospool.dataSource.getConnection();
-            sSql="insert into venta(estado,importe,pago,fecha,hora,idCliente,"
+            sSql="insert into venta(estado,importe,descuento,pago,fecha,hora,idCliente,"
                 + "idTrab,idCaja)"+
-                "values(?,?,?,?,?,?,?,?)";
+                "values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst=cn.prepareStatement(sSql);
             pst.setString(1, dts.getEstado());
             pst.setDouble(2, dts.getImporte());
-            pst.setDouble(3, dts.getPago());
-            pst.setString(4,dts.getFecha());
-            pst.setString(5, dts.getHora());
-            pst.setDouble(6, dts.getIdCliente());
-            pst.setDouble(7, dts.getIdTrab());
-            pst.setString(8, dts.getIdCaja());
+            pst.setDouble(3, dts.getDescuento());
+            pst.setDouble(4, dts.getPago());
+            pst.setString(5,dts.getFecha());
+            pst.setString(6, dts.getHora());
+            pst.setDouble(7, dts.getIdCliente());
+            pst.setDouble(8, dts.getIdTrab());
+            pst.setString(9, dts.getIdCaja());
             int n=pst.executeUpdate();
             if(n!=0){
                 return true;
@@ -78,18 +79,19 @@ public class logventa {
        public boolean editar(datosventa dts){
         try {
             cn = metodospool.dataSource.getConnection();
-            sSql="update venta set  estado=?, importe=?, pago=?,fecha=?,hora=?,idCliente=?,"
+            sSql="update venta set  estado=?, importe=?, descuento=?, pago=?,fecha=?,hora=?,idCliente=?,"
                 + "idTrab=?, idCaja=? where idVenta=?";
             PreparedStatement pst=cn.prepareStatement(sSql);
             pst.setString(1, dts.getEstado());
             pst.setDouble(2, dts.getImporte());
-            pst.setDouble(3, dts.getPago());
-            pst.setString(4,dts.getFecha());
-            pst.setString(5, dts.getHora());
-            pst.setDouble(6, dts.getIdCliente());
-            pst.setDouble(7, dts.getIdTrab());
-            pst.setString(8, dts.getIdCaja());
-            pst.setInt(9,dts.getIdVenta());
+            pst.setDouble(3, dts.getDescuento());
+            pst.setDouble(4, dts.getPago());
+            pst.setString(5,dts.getFecha());
+            pst.setString(6, dts.getHora());
+            pst.setDouble(7, dts.getIdCliente());
+            pst.setDouble(8, dts.getIdTrab());
+            pst.setString(9, dts.getIdCaja());
+            pst.setInt(10,dts.getIdVenta());
             int n=pst.executeUpdate();
             if(n!=0){
                 return true;
@@ -166,12 +168,12 @@ public class logventa {
     }
  
      public String [] mostrarconsultaventas(String buscar){
-    String [] registro = new String [19];
+    String [] registro = new String [18];
     totalregistros=0;
     datosarticulo datos = new datosarticulo();
     try {
         cn = metodospool.dataSource.getConnection();
-        sSql="SELECT venta.idVenta, venta.estado, venta.importe,venta.pago,venta.fecha,venta.hora,venta.idCaja,"
+        sSql="SELECT venta.idVenta, venta.estado, venta.importe,venta.descuento,(venta.descuento/(venta.descuento+venta.importe)) as descuentoporcentaje ,venta.pago,venta.fecha,venta.hora,venta.idCaja,"
             + "cliente.idCliente,cliente.nombre,cliente.apellidos,cliente.negocio, cliente.tipoCliente,cliente.precio,"
             + "trabajador.idTrab,trabajador.nombre,trabajador.apellidos,"
             + "detalleventa.idSubventa,detalleventa.idArt,articulo.descripcion,detalleventa.precio,detalleventa.precioCompra,"
@@ -186,19 +188,21 @@ public class logventa {
            registro [0]=rs.getString("venta.idVenta");
             registro [1]=rs.getString("venta.estado");
             registro [2]=rs.getString("venta.importe");
-            registro [3]=rs.getString("venta.pago");
-            registro [4]=rs.getString("venta.fecha");
-            registro [5]=rs.getString("venta.hora");
-            registro [6]=rs.getString("venta.idCaja");
-            registro [7]=rs.getString("cliente.idCliente");
-            registro [8]=rs.getString("cliente.nombre");
-            registro [9]=rs.getString("cliente.apellidos");
-            registro [10]=rs.getString("cliente.negocio");
-            registro [11]=rs.getString("cliente.tipoCliente");
-            registro [12]=rs.getString("cliente.precio");
-            registro [13]=rs.getString("trabajador.idTrab");
-            registro [14]=rs.getString("trabajador.nombre");
-            registro [15]=rs.getString("trabajador.apellidos");
+            registro [3]=rs.getString("venta.descuento");
+            registro [4]=rs.getString("descuentoporcentaje");
+            registro [5]=rs.getString("venta.pago");
+            registro [6]=rs.getString("venta.fecha");
+            registro [7]=rs.getString("venta.hora");
+            registro [8]=rs.getString("venta.idCaja");
+            registro [9]=rs.getString("cliente.idCliente");
+            registro [10]=rs.getString("cliente.nombre");
+            registro [11]=rs.getString("cliente.apellidos");
+            registro [12]=rs.getString("cliente.negocio");
+            registro [13]=rs.getString("cliente.tipoCliente");
+            registro [14]=rs.getString("cliente.precio");
+            registro [15]=rs.getString("trabajador.idTrab");
+            registro [16]=rs.getString("trabajador.nombre");
+            registro [17]=rs.getString("trabajador.apellidos");
             totalregistros=totalregistros+1;
             }
            return registro;

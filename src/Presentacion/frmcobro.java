@@ -19,6 +19,18 @@ public class frmcobro extends javax.swing.JInternalFrame {
 
     private Dialog dialogo;
     private String importetotal;
+    Double subtotal,total, efectivo, cambio, adeudo, descuento,descuentoefectivo;
+    /*
+    subtotal: Dinero a cobrar antes del descuento. Esto aparece en la parte superior
+              de la ventana de cobro.
+    Total: Dinero total a cobrar despues del descuento.
+    Efectivo: Dinero en efectivo a recibir del cliente.
+    Cambio: Dinero que se le regresa al cliente.
+    Adeudo: Dinero que resta por pagar el cliente.
+    Descuento: Porcentaje del descuento a aplicar.
+    descuentoefectivo: Dinero a descontar.
+    */
+    
     
     /**
      * Creates new form frmcobro
@@ -46,11 +58,17 @@ public class frmcobro extends javax.swing.JInternalFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblimporte = new javax.swing.JLabel();
+        lblsubtotal = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtefectivo = new javax.swing.JTextField();
+        txtdescuento = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtdescuentttotal = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lblimportecobrar = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -63,11 +81,11 @@ public class frmcobro extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Importe a cobrar $");
+        jLabel1.setText("Subtotal $");
 
-        lblimporte.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        lblimporte.setForeground(new java.awt.Color(255, 255, 255));
-        lblimporte.setText("0.0");
+        lblsubtotal.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        lblsubtotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblsubtotal.setText("0.0");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -77,7 +95,7 @@ public class frmcobro extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(lblimporte, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106))
         );
         jPanel6Layout.setVerticalGroup(
@@ -86,7 +104,7 @@ public class frmcobro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblimporte))
+                    .addComponent(lblsubtotal))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -105,38 +123,96 @@ public class frmcobro extends javax.swing.JInternalFrame {
             }
         });
 
+        txtdescuento.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        txtdescuento.setText("0");
+        txtdescuento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtdescuentoFocusGained(evt);
+            }
+        });
+        txtdescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdescuentoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel3.setText("Descuento %");
+
+        txtdescuentttotal.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        txtdescuentttotal.setText("0");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel5.setText("Descuento $");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(txtefectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtefectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtdescuento, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(txtdescuentttotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtdescuentttotal)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtefectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel1.setBackground(new java.awt.Color(242, 124, 13));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Importe a cobrar $");
+
+        lblimportecobrar.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        lblimportecobrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblimportecobrar.setText("0.0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 746, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(lblimportecobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblimportecobrar))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
@@ -159,7 +235,7 @@ public class frmcobro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(66, 66, 66)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -167,10 +243,13 @@ public class frmcobro extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -179,38 +258,52 @@ public class frmcobro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtefectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtefectivoActionPerformed
-       Double importe, efectivo, cambio, adeudo;
-       importe=Double.parseDouble(lblimporte.getText());
+      
+       try{
+       
+       total=Double.parseDouble(lblimportecobrar.getText());
        efectivo=Double.parseDouble(txtefectivo.getText());
-       cambio=logcommon.redondeando(efectivo-importe);
-       adeudo=importe-efectivo;
-        if (efectivo>=importe) {
+       cambio=efectivo-total;
+       adeudo=total-efectivo;
+        if (efectivo>=total) {
             
-            frmpuntoventa.lblefectivo.setText(importe+"");
+            frmpuntoventa.lblefectivo.setText(total+"");
         }else{
              frmpuntoventa.lblefectivo.setText(efectivo+"");
         }
         frmpuntoventa.lblefectivo2.setText(efectivo+"");
-        frmpuntoventa.lblcambio.setText(""+cambio);
-        dialogo.dispose();      
-      
+        frmpuntoventa.lblcambio.setText(""+logcommon.redondeando(cambio));
+        frmpuntoventa.descuento= Double.parseDouble(txtdescuentttotal.getText());
+        frmpuntoventa.porcentajedescuento= descuento;
+        frmpuntoventa.lbltotal.setText(total+"");
+        dialogo.dispose();
+       }catch(Exception ex){
+       JOptionPane.showMessageDialog(rootPane, "Error 1001: "+ex);
+       }
     }//GEN-LAST:event_txtefectivoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Double importe, efectivo, cambio, adeudo;
-       importe=Double.parseDouble(lblimporte.getText());
+      
+        try{
+       
+       total=Double.parseDouble(lblimportecobrar.getText());
        efectivo=Double.parseDouble(txtefectivo.getText());
-       cambio=efectivo-importe;
-       adeudo=importe-efectivo;
-        if (efectivo>=importe) {
+       cambio=efectivo-total;
+       adeudo=total-efectivo;
+        if (efectivo>=total) {
             
-            frmpuntoventa.lblefectivo.setText(importe+"");
+            frmpuntoventa.lblefectivo.setText(total+"");
         }else{
              frmpuntoventa.lblefectivo.setText(efectivo+"");
         }
         frmpuntoventa.lblefectivo2.setText(efectivo+"");
-        frmpuntoventa.lblcambio.setText(""+cambio);
+        frmpuntoventa.lblcambio.setText(""+logcommon.redondeando(cambio));
+        frmpuntoventa.descuento= Double.parseDouble(txtdescuentttotal.getText());
+        frmpuntoventa.lbltotal.setText(total+"");
         dialogo.dispose();
+       }catch(Exception ex){
+       JOptionPane.showMessageDialog(rootPane, "Error 1001: "+ex);
+       }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -220,18 +313,39 @@ public class frmcobro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formMouseReleased
 
     private void txtefectivoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtefectivoFocusGained
-        lblimporte.setText(importetotal);
+        //txtsubtotal.setText(importetotal);
     }//GEN-LAST:event_txtefectivoFocusGained
+
+    private void txtdescuentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtdescuentoFocusGained
+       lblsubtotal.setText(importetotal);
+        txtdescuento.selectAll();
+    }//GEN-LAST:event_txtdescuentoFocusGained
+
+    private void txtdescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescuentoActionPerformed
+        subtotal=Double.parseDouble(lblsubtotal.getText());
+        descuento=Double.parseDouble(txtdescuento.getText());
+        descuentoefectivo=logcommon.redondeando(subtotal*(descuento*0.01)) ;
+        txtdescuentttotal.setText(descuentoefectivo+"");
+        total=subtotal-descuentoefectivo;
+        lblimportecobrar.setText(total+"");
+        txtdescuento.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdescuentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
-    public static javax.swing.JLabel lblimporte;
+    public static javax.swing.JLabel lblimportecobrar;
+    public static javax.swing.JLabel lblsubtotal;
+    private javax.swing.JTextField txtdescuento;
+    private javax.swing.JLabel txtdescuentttotal;
     private javax.swing.JTextField txtefectivo;
     // End of variables declaration//GEN-END:variables
 }

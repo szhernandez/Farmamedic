@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="169" pageHeight="340" columnWidth="169" leftMargin="0" rightMargin="0" topMargin="6" bottomMargin="5" isIgnorePagination="true" uuid="c4e848da-a067-47e3-a5f4-b7b52f2b17b5">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="169" pageHeight="360" columnWidth="169" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="c4e848da-a067-47e3-a5f4-b7b52f2b17b5">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="82"/>
+	<property name="ireport.y" value="84"/>
 	<parameter name="Logo" class="java.lang.Object"/>
 	<parameter name="idvent" class="java.lang.Integer"/>
 	<parameter name="efectivo" class="java.lang.Double"/>
 	<queryString>
-		<![CDATA[SELECT cliente.idCliente, cliente.nombre,cliente.apellidos,cliente.negocio, detalleventa.idArt,detalleventa.precio,detalleventa.unidades,detalleventa.subtotal, venta.idVenta,venta.importe,venta.pago,venta.fecha,venta.hora, articulo.descripcion,trabajador.idTrab, trabajador.nombre as nombretrab,trabajador.apellidos as apellidostrab, empresa.idEmpresa,empresa.Nombre as nombreempresa,empresa.RFC,empresa.Calle,empresa.Numero,empresa.Colonia,empresa.CP,empresa.Ciudad,empresa.Estado,empresa.Pais,empresa.Telefono,empresa.Representante from cliente,detalleventa,venta,articulo,trabajador,empresa where articulo.idArt=detalleventa.idArt and cliente.idCliente=venta.idCliente and trabajador.idTrab=venta.idTrab and detalleventa.idVenta= venta.idVenta and venta.idVenta = $P{idvent}]]>
+		<![CDATA[SELECT cliente.idCliente, cliente.nombre,cliente.apellidos,cliente.negocio, detalleventa.idArt,detalleventa.precio,detalleventa.unidades,detalleventa.subtotal, venta.idVenta,venta.importe,venta.descuento,venta.pago,venta.fecha,venta.hora, articulo.descripcion,trabajador.idTrab, trabajador.nombre as nombretrab,trabajador.apellidos as apellidostrab, empresa.idEmpresa,empresa.Nombre as nombreempresa,empresa.RFC,empresa.Calle,empresa.Numero,empresa.Colonia,empresa.CP,empresa.Ciudad,empresa.Estado,empresa.Pais,empresa.Telefono,empresa.Representante from cliente,detalleventa,venta,articulo,trabajador,empresa where articulo.idArt=detalleventa.idArt and cliente.idCliente=venta.idCliente and trabajador.idTrab=venta.idTrab and detalleventa.idVenta= venta.idVenta and venta.idVenta = $P{idvent}]]>
 	</queryString>
 	<field name="idCliente" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -38,6 +38,9 @@
 	</field>
 	<field name="importe" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Dinero total que se requiere pagar]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="pago" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[Dinero recibido por parte del cliente]]></fieldDescription>
@@ -147,7 +150,7 @@
 				<textElement>
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Ciudad}+" "+$F{Estado}+" "+$F{Pais}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Ciudad}+", "+$F{Estado}+", "+$F{Pais}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="36" width="139" height="10" uuid="9e5c73df-2a7c-4922-b3f4-3e1f9dafe316"/>
@@ -215,10 +218,10 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="17" splitType="Stretch"/>
+		<band height="13" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="66" splitType="Stretch">
+		<band height="84" splitType="Stretch">
 			<line>
 				<reportElement x="2" y="1" width="137" height="1" uuid="ed5906f6-716f-459a-ac54-5d05f102b051"/>
 				<graphicElement>
@@ -226,39 +229,53 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="42" width="139" height="12" uuid="9afc4259-d96b-4568-af8d-fb6c5103041c"/>
+				<reportElement x="0" y="59" width="139" height="12" uuid="9afc4259-d96b-4568-af8d-fb6c5103041c"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GRACIAS POR SU COMPRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="53" width="139" height="12" uuid="0bf0601b-adbb-4a0c-9e72-a62c5e4b0182"/>
+				<reportElement x="0" y="70" width="139" height="12" uuid="0bf0601b-adbb-4a0c-9e72-a62c5e4b0182"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[---VUELVA PRONTO---]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="1" y="6" width="139" height="12" uuid="e4b5340d-987a-4fd0-9c26-e830ebb90f62"/>
+				<reportElement x="1" y="23" width="139" height="12" uuid="e4b5340d-987a-4fd0-9c26-e830ebb90f62"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["TOTAL: $"+$F{importe}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1" y="17" width="139" height="12" uuid="a84d8fed-c350-4444-a086-bcd0d799645f"/>
+				<reportElement x="1" y="34" width="139" height="12" uuid="a84d8fed-c350-4444-a086-bcd0d799645f"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["EFECTIVO: $"+$P{efectivo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1" y="28" width="139" height="12" uuid="9183a1ef-300b-46a2-a7f7-143806dcaab0"/>
+				<reportElement x="1" y="45" width="139" height="12" uuid="9183a1ef-300b-46a2-a7f7-143806dcaab0"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["CAMBIO: $"+    new DecimalFormat("###,###.##").format(($P{efectivo}.doubleValue()-$F{importe}.doubleValue()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="12" width="139" height="12" uuid="85aedcce-a24b-43e8-a933-060a9ced66b5"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DESCUENTO: $"+$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="2" width="139" height="12" uuid="0b9f1307-fda6-47a4-ad74-1755fbc26e1b"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SUBTOTAL: $"+new Double($F{descuento}.doubleValue() + $F{importe}.doubleValue())]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

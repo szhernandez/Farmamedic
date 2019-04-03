@@ -351,7 +351,7 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
 
         lbl_idcaja.setText("idcaja");
 
-        lblefectivo.setText("No borrar, sirve para saber estado de venta");
+        lblefectivo.setText("Efectivo");
 
         lblcambio.setText("cambio");
 
@@ -404,7 +404,7 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
                                 .addComponent(lbladeudo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbl_idcaja)))
-                        .addContainerGap(815, Short.MAX_VALUE))
+                        .addContainerGap(895, Short.MAX_VALUE))
                     .addGroup(panelvariablesLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel9)
@@ -502,7 +502,7 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
     //Declarando variables publicas
     public static String Agentenombre="",agenteapellidos="",agentetelefono="";//DAtos agente, devueltos de dialog
     public  static ImageIcon logo,imagenagua;
-   // public static Double pago;
+    public static double descuento, porcentajedescuento;
     public Integer totalregistros;//Variable a utilizar como contador
     DefaultTableModel modelo= new DefaultTableModel(){
     
@@ -731,13 +731,14 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
                 dtsventa.setEstado("Por pagar");
             }
             dtsventa.setImporte(importe);
+            dtsventa.setDescuento(descuento);
             dtsventa.setPago(efectivo);
             dtsventa.setFecha(comun.fechaactual());
             dtsventa.setHora(comun.horaactual());
             dtsventa.setIdCliente(Integer.parseInt(lbl_idcliente.getText()));
             dtsventa.setIdTrab(Integer.parseInt(lbl_idtrabajador.getText()));
             dtsventa.setIdCaja(lbl_idcaja.getText());
-            JOptionPane.showMessageDialog(rootPane, "importe: "+importe+"  Pago:  "+efectivo+". Hora: "+". Cliente: "+lbl_idcliente.getText()+". Id trab:  "+lbl_idtrabajador.getText()+". Idcaja:  "+lbl_idcaja.getText());
+            //JOptionPane.showMessageDialog(rootPane, "importe: "+importe+"  Pago:  "+efectivo+". Hora: "+". Cliente: "+lbl_idcliente.getText()+". Id trab:  "+lbl_idtrabajador.getText()+". Idcaja:  "+lbl_idcaja.getText());
             try {//Comienza try
                  if (logvent.insertar(dtsventa)) {
                 // JOptionPane.showMessageDialog(rootPane, "venta registrada");
@@ -799,6 +800,10 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
     
     }
     
+    void updateprecioxdescuento(){
+     Integer ultimaventa=Integer.parseInt(logvent.mostrarultima());
+     logdetventa.editarprecioxdescuento(porcentajedescuento/100, ultimaventa);
+    }
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
      if(txtcliente.getText().length()==0){
@@ -919,12 +924,8 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
         }else{
              JOptionPane.showMessageDialog(rootPane, "Primero agrege productos a la venta");
             return;}
-        
          
-             
         try {
-       
-        
         abrirventanacobro();
             try {
                 guardandoventa();
@@ -948,6 +949,9 @@ public class frmpuntoventa extends javax.swing.JInternalFrame {
            ticket.imprimiendo_nota(Agentenombre, agenteapellidos, agentetelefono);
                     }
                abrirdialogocambio();
+               //Por ultimo cambiamos los precios en caso de que se haya aplicado 
+               //un descuento desde la ventana de cobro
+              updateprecioxdescuento();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "OOPPSS... Poblemas con el documento (btncerrarventa) "+e);
             }

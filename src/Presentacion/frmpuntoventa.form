@@ -453,7 +453,7 @@
                                   <Component id="lbl_idcaja" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="815" max="32767" attributes="0"/>
+                          <EmptySpace pref="895" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -516,7 +516,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblefectivo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="No borrar, sirve para saber estado de venta"/>
+            <Property name="text" type="java.lang.String" value="Efectivo"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
