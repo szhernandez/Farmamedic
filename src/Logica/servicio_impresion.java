@@ -107,6 +107,57 @@ public class servicio_impresion {
         }
    
     }
+     public void reimprimiendo_ticket_venta(int venta,double efectivo){
+        try {
+            obteniendoimpresoras();
+            logo=new javax.swing.ImageIcon(getClass().getResource("/Img/Logo/logo.jpg"));
+          //imagenagua=new javax.swing.ImageIcon(frmpv_equipaje.class.getResource("/Img/Logo/agua.png")); 
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/smartpos", "root", "");
+            JasperReport jr= (JasperReport)JRLoader.loadObject(frminicio.class.getResource("/Reportes/ticket_venta_reimpresion.jasper"));
+            Map parametros = new HashMap<String,Object>();
+            parametros.put("idvent", venta);
+            parametros.put("efectivo", efectivo);
+            parametros.put("Logo", logo.getImage());
+            JasperPrint print=  JasperFillManager.fillReport(jr, parametros,conexion);
+   
+            PrinterJob job = PrinterJob.getPrinterJob();
+            /* Create an array of PrintServices */
+            PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+            int selectedService = 0;
+            /* Scan found services to see if anyone suits our needs */
+            for(int i = 0; i <services.length;i++){
+            if(services[i].getName().contains(imp_tickets)){
+            /*If the service is named as what we are querying we select it */
+             selectedService = i;
+             }
+            }
+            job.setPrintService(services[selectedService]);
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            //MediaSizeName mediaSizeName = MediaSize.findMedia(4,4,MediaPrintableArea.INCH);
+            //printRequestAttributeSet.add(mediaSizeName);
+            printRequestAttributeSet.add(new Copies(1));
+            JRPrintServiceExporter exporter;
+            exporter = new JRPrintServiceExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+            /* We set the selected service and pass it as a paramenter */
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE,
+                services[selectedService]);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET,
+                services[selectedService].getAttributes());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET,
+                printRequestAttributeSet);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG,
+                Boolean.FALSE);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG,
+                Boolean.FALSE);//Si dessea que aparesca el dialogo poner true, en caso de false se imprimira en automatico
+            exporter.exportReport();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al imprimir ticket de venta: "+ e);
+                    
+        }
+   
+    }
     public void imprimiendo_ticket_compra(int compra){
         try {
             obteniendoimpresoras();
@@ -328,4 +379,69 @@ public class servicio_impresion {
   
        
      }
+    public void reimprimiendo_nota(String Agentenombre,String agenteapellidos, String agentetelefono){
+        try {
+            obteniendoimpresoras();
+           logo=new javax.swing.ImageIcon(getClass().getResource("/Img/Logo/logo.jpg"));
+           imagenagua=new javax.swing.ImageIcon(getClass().getResource("/Img/Logo/agua.png"));
+              
+           Class.forName("com.mysql.jdbc.Driver");
+           Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/smartpos", "root", "");
+            JasperReport jr= (JasperReport)JRLoader.loadObject(frminicio.class.getResource("/Reportes/Notaventa_reimpresion.jasper"));
+            Map parametros = new HashMap<String,Object>();
+            parametros.put("idventa", Integer.parseInt(logvent.mostrarultima().toString()));
+            parametros.put("nombreagente", Agentenombre);
+            parametros.put("apellidoagente", agenteapellidos);
+            parametros.put("telagente", agentetelefono);
+            parametros.put("obs", " ");
+            parametros.put("logo", logo.getImage());
+            parametros.put("marcaagua", imagenagua.getImage());
+            //--------------Visualizando-----------------------------
+            
+            JasperPrint jp=  JasperFillManager.fillReport(jr, parametros,conexion);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            
+            //--------------Imprimiendo------------------------------
+             PrinterJob job = PrinterJob.getPrinterJob();
+            /* Create an array of PrintServices */
+            PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+            int selectedService = 0;
+            /* Scan found services to see if anyone suits our needs */
+            for(int i = 0; i <services.length;i++){
+            //Se escribe el nombre de la impresora a usar, para este caso tickets
+            if(services[i].getName().contains(imp_notas)){
+            /*If the service is named as what we are querying we select it */
+             selectedService = i;
+             }
+            }
+            job.setPrintService(services[selectedService]);
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            //MediaSizeName mediaSizeName = MediaSize.findMedia(4,4,MediaPrintableArea.INCH);
+            //printRequestAttributeSet.add(mediaSizeName);
+            printRequestAttributeSet.add(new Copies(1));
+            JRPrintServiceExporter exporter;
+            exporter = new JRPrintServiceExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+            /* We set the selected service and pass it as a paramenter */
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE,
+                services[selectedService]);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET,
+                services[selectedService].getAttributes());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET,
+                printRequestAttributeSet);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG,
+                Boolean.FALSE);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG,
+                Boolean.FALSE);//Si dessea que aparesca el dialogo poner true, en caso de false se imprimira en automatico
+            exporter.exportReport();
+            conexion.close();
+            conexion.close(); 
+        } catch (Exception e) {
+               JOptionPane.showMessageDialog(null,"Error al imprimir nota de venta: "+ e);
+        }
+  
+       
+     }
+
 }

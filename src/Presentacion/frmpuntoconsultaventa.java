@@ -82,6 +82,7 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
         txtidcliente = new javax.swing.JTextField();
         txtnombrecliente = new javax.swing.JTextField();
         txtclientenegocio = new javax.swing.JTextField();
+        btndevolucion = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtnumventa = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -100,7 +101,6 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         txtidcaja = new javax.swing.JTextField();
-        btndevolucion = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         lbltotal = new javax.swing.JLabel();
@@ -230,6 +230,18 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
             }
         });
 
+        btndevolucion.setBackground(new java.awt.Color(255, 255, 255));
+        btndevolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/32x32/checkmark.png"))); // NOI18N
+        btndevolucion.setText("Realizar devolucion");
+        btndevolucion.setToolTipText("Realizar devolucion");
+        btndevolucion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btndevolucion.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btndevolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndevolucionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -256,6 +268,8 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                         .addComponent(txttipocliente, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(txtclientenegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btndevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
@@ -269,7 +283,8 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtidcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnombrecliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtclientenegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtclientenegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btndevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtlistaprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,18 +529,6 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                     .addComponent(txtidcaja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        btndevolucion.setBackground(new java.awt.Color(255, 255, 255));
-        btndevolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/32x32/checkmark.png"))); // NOI18N
-        btndevolucion.setText("Realizar devolucion");
-        btndevolucion.setToolTipText("Realizar devolucion");
-        btndevolucion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btndevolucion.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        btndevolucion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndevolucionActionPerformed(evt);
-            }
-        });
-
         jPanel5.setBackground(new java.awt.Color(242, 124, 13));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -666,8 +669,6 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btndevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addComponent(jScrollPane1)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -681,11 +682,7 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btndevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -839,8 +836,9 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
     }
      
     void calculodescuento(){
-         descuento= logcommon.redondeando(Double.parseDouble(lbltotal.getText())*descuentoporcentaje);
-        
+        Double descuentoactual;
+         descuentoactual= Double.parseDouble(lbltotal.getText())*descuentoporcentaje;
+         descuento=logcommon.redondeando((Double.parseDouble(lbltotal.getText())+descuentoactual)*descuentoporcentaje);
         lbldescuento.setText(descuento+"");
     }
     
@@ -1046,14 +1044,14 @@ public class frmpuntoconsultaventa extends javax.swing.JInternalFrame {
             }
              try {
                 if(txttipodocumento.getText().equals("Ticket")){
-                     ticket.imprimiendo_ticket_venta(Integer.parseInt(txtnumventa.getText()),Double.parseDouble(frmpuntoconsultaventa.lblpago.getText()));
+                     ticket.reimprimiendo_ticket_venta(Integer.parseInt(txtnumventa.getText()),Double.parseDouble(frmpuntoconsultaventa.lblpago.getText()));
                 }
            //Se genera la nota de venta
            if(txttipodocumento.getText().equals("Nota")){
          abrirdialogtrabajador();
           //Class.forName("com.mysql.jdbc.Driver");
           Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/smartpos", "root", "");
-          JasperReport jr= (JasperReport)JRLoader.loadObject(getClass().getResource("/Reportes/Notaventa.jasper"));
+          JasperReport jr= (JasperReport)JRLoader.loadObject(getClass().getResource("/Reportes/Notaventa_reimpresion.jasper"));
           Map parametros = new HashMap<String,Object>();
           logoconsultaventa=new javax.swing.ImageIcon(getClass().getResource("/Img/Logo/logo.jpg"));
           imagenaguaconsultaventa=new javax.swing.ImageIcon(frmpuntoconsultaventa.class.getResource("/Img/Logo/agua.png"));  
